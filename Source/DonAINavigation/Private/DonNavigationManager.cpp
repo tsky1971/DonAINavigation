@@ -15,6 +15,8 @@
 #include "DonNavigationManager.h"
 #include "DonAINavigationPrivatePCH.h"
 #include "Multithreading/DonNavigationWorker.h"
+#include "Components/LineBatchComponent.h"
+#include "Engine/OverlapResult.h"   // Erforderlich für FOverlapResult
 
 #include <stdio.h>
 #include <limits>
@@ -88,7 +90,9 @@ ADonNavigationManager::ADonNavigationManager(const FObjectInitializer& ObjectIni
 // Debug Helpers:
 static ULineBatchComponent* GetDebugLineBatcher(const UWorld* InWorld, bool bPersistentLines, float LifeTime, bool bDepthIsForeground)
 {
-	return (InWorld ? (bDepthIsForeground ? InWorld->ForegroundLineBatcher : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->PersistentLineBatcher : InWorld->LineBatcher)) : NULL);
+	// old 5.4 return (InWorld ? (bDepthIsForeground ? InWorld->ForegroundLineBatcher : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->PersistentLineBatcher : InWorld->LineBatcher)) : NULL);		
+	// return (InWorld ? (bDepthIsForeground ? InWorld->GetLineBatcher(ELineBatcherType::Foreground) : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->GetLineBatcher(ELineBatcherType::WorldPersistent) : InWorld->GetLineBatcher(ELineBatcherType::World))) : NULL);
+	return (InWorld ? (bDepthIsForeground ? InWorld->GetLineBatcher(UWorld::ELineBatcherType::Foreground) : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->GetLineBatcher(UWorld::ELineBatcherType::ForegroundPersistent) : InWorld->GetLineBatcher(UWorld::ELineBatcherType::World))) : NULL);
 }
 
 /* 
