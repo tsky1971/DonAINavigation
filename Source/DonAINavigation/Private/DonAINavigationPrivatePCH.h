@@ -1,4 +1,4 @@
-// The MIT License(MIT)
+﻿// The MIT License(MIT)
 //
 // Copyright(c) 2015 Venugopalan Sreedharan
 //
@@ -12,8 +12,19 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#include "CoreUObject.h"
-#include "Engine.h"
+// monolithic header - no go - #include "CoreUObject.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
+
+#include "EngineUtils.h"
+
+#include "Engine/OverlapResult.h"
+
+// Komponenten (behebt Billboard Fehler)
+#include "Components/BillboardComponent.h"
+#include "Components/LineBatchComponent.h"
+
 
 // You should place include statements to your module's private header files here.  You only need to
 // add includes for headers that are used in most of your module's source files though.

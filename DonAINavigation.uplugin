@@ -20,9 +20,8 @@
       "LoadingPhase" : "PreDefault",
       "WhitelistPlatforms" :
       [
-		  "Win64", 
-		  "Linux", 
-		  "Mac"
+		  "Win64",
+		  "Linux"
       ]
     }
   ]

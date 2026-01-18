@@ -1,4 +1,4 @@
-// The MIT License(MIT)
+ï»¿// The MIT License(MIT)
 //
 // Copyright(c) 2015 Venugopalan Sreedharan
 //
@@ -14,9 +14,24 @@
 
 #include "DonNavigationManager.h"
 #include "DonAINavigationPrivatePCH.h"
+
 #include "Multithreading/DonNavigationWorker.h"
+
+#include "UObject/ConstructorHelpers.h"
+
 #include "Components/LineBatchComponent.h"
-#include "Engine/OverlapResult.h"   // Erforderlich für FOverlapResult
+#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+
+#include "Engine/SkeletalMesh.h"
+#include "Engine/StaticMesh.h" 
+#include "Engine/Texture2D.h"
+#include "Engine/OverlapResult.h"
+#include "Engine/World.h"
+
+#include "DrawDebugHelpers.h"
+
+#include "GameFramework/Actor.h"
 
 #include <stdio.h>
 #include <limits>

@@ -15,6 +15,12 @@
 
 #pragma once
 
+#include "CoreMinimal.h"            // Für int32, uint32
+#include "HAL/Runnable.h"           // Für FRunnable
+#include "HAL/RunnableThread.h"     // Für FRunnableThread
+#include "HAL/ThreadSafeCounter.h"  // Für FThreadSafeCounter
+#include "HAL/PlatformProcess.h"
+
 class ADonNavigationManager;
 
 class FDonNavigationWorker: public FRunnable

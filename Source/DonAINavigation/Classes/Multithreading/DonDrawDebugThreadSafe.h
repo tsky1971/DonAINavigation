@@ -14,6 +14,11 @@
 
 #pragma once
 
+#include "CoreMinimal.h" 
+// Wichtig für Linux-Clang, da FVector hier oft explizit verlangt wird:
+#include "Math/Vector.h"
+#include "Math/Color.h"
+
 struct FDrawDebugLineRequest
 {
 	FVector LineStart;
