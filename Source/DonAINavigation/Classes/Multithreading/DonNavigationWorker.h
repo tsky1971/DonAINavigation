@@ -1,4 +1,4 @@
-// The MIT License(MIT)
+﻿// The MIT License(MIT)
 //
 // Copyright(c) 2015 Venugopalan Sreedharan
 //
@@ -14,6 +14,12 @@
 
 
 #pragma once
+
+#include "CoreMinimal.h"            // int32, uint32
+#include "HAL/Runnable.h"           // FRunnable
+#include "HAL/RunnableThread.h"     // FRunnableThread
+#include "HAL/ThreadSafeCounter.h"  // FThreadSafeCounter
+#include "HAL/PlatformProcess.h"
 
 class ADonNavigationManager;
 

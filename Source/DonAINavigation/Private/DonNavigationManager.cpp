@@ -1,4 +1,4 @@
-// The MIT License(MIT)
+﻿// The MIT License(MIT)
 //
 // Copyright(c) 2015 Venugopalan Sreedharan
 //
@@ -14,7 +14,26 @@
 
 #include "DonNavigationManager.h"
 #include "DonAINavigationPrivatePCH.h"
+
 #include "Multithreading/DonNavigationWorker.h"
+
+#include "UObject/ConstructorHelpers.h"
+
+#include "Components/LineBatchComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+
+#include "Engine/SkeletalMesh.h"
+#include "Engine/StaticMesh.h" 
+#include "Engine/Texture2D.h"
+#include "Engine/OverlapResult.h"
+#include "Engine/World.h"
+
+#include "DrawDebugHelpers.h"
+
+#include "GameFramework/Actor.h"
+
+#include "Misc/EngineVersionComparison.h"
 
 #include <stdio.h>
 #include <limits>
@@ -85,11 +104,24 @@ ADonNavigationManager::ADonNavigationManager(const FObjectInitializer& ObjectIni
 	AutoCorrectionGuessList.Add(1000);
 }
 
+#if UE_VERSION_NEWER_THAN(5, 4, 0)
 // Debug Helpers:
 static ULineBatchComponent* GetDebugLineBatcher(const UWorld* InWorld, bool bPersistentLines, float LifeTime, bool bDepthIsForeground)
 {
 	return (InWorld ? (bDepthIsForeground ? InWorld->ForegroundLineBatcher : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->PersistentLineBatcher : InWorld->LineBatcher)) : NULL);
 }
+
+#elif UE_VERSION_NEWER_THAN(5, 6, 0)
+
+// Debug Helpers:
+static ULineBatchComponent* GetDebugLineBatcher(const UWorld* InWorld, bool bPersistentLines, float LifeTime, bool bDepthIsForeground)
+{
+	// old 5.4 return (InWorld ? (bDepthIsForeground ? InWorld->ForegroundLineBatcher : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->PersistentLineBatcher : InWorld->LineBatcher)) : NULL);		
+	// return (InWorld ? (bDepthIsForeground ? InWorld->GetLineBatcher(ELineBatcherType::Foreground) : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->GetLineBatcher(ELineBatcherType::WorldPersistent) : InWorld->GetLineBatcher(ELineBatcherType::World))) : NULL);
+	return (InWorld ? (bDepthIsForeground ? InWorld->GetLineBatcher(UWorld::ELineBatcherType::Foreground) : ((bPersistentLines || (LifeTime > 0.f)) ? InWorld->GetLineBatcher(UWorld::ELineBatcherType::ForegroundPersistent) : InWorld->GetLineBatcher(UWorld::ELineBatcherType::World))) : NULL);
+
+}
+#endif
 
 /* 
 * Used to draw a debug voxel. This is based on code borrowed from DrawDebugHelpers, customized for our specific needs

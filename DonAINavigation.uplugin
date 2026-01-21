@@ -21,8 +21,7 @@
       "WhitelistPlatforms" :
       [
 		  "Win64", 
-		  "Linux", 
-		  "Mac"
+		  "Linux"
       ]
     }
   ]

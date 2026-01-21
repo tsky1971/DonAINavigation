@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include "CoreMinimal.h" // Behebt uint32, FORCEINLINE, uint64
 #include "DonNavigationCommon.h"
 #include "Multithreading/DonDrawDebugThreadSafe.h"
 #include "CollisionQueryParams.h"
